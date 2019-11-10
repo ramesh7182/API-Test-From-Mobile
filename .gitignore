@@ -1,0 +1,27 @@
+*/target/
+**/test-output/
+/test-result/
+.idea/workspace.xml
+.metadata/
+temp/
+*.iml
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+*.metadata/
+
+.DS_Store
+.svn
+.classpath
+.settings
+.idea/
+*/build/
+/build/
+debug.log
+/bin/
+**/target
+target/
+**/.~lock*
+**/.project
