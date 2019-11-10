@@ -96,6 +96,11 @@ public class AndroidCommonMethods {
 		driver.pressKeyCode(AndroidKeyCode.BACK);
 		wait(5);
 	}
+	public static void navigateHome()
+	{
+		driver.pressKeyCode(AndroidKeyCode.HOME);
+		wait(5);
+	}
 	public static void verifyText(By be, String text)
 	{
 		waitForElementToBeVisible(be);
@@ -111,6 +116,11 @@ public class AndroidCommonMethods {
 	{
 		wait(5);
 		assertTrue(we.isDisplayed(),"Element is not displayed");
+	}
+	public static void startActivity(String appPackage, String activityName)
+	{
+		driver.startActivity(appPackage, activityName);
+		wait(5);
 	}
 	public static void waitForElementToBeVisible(By be)
 	{

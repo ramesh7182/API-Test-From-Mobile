@@ -25,7 +25,7 @@ public class HttpTest extends BaseTest {
 				.verifyNoResourceError();
 		LOG.info("Exit:requestAPIWithFileNotFound");
 	}
-	@Test(description="Sending request to non exist page", dataProvider = "readTestData")
+	@Test(description="Sending request to Valid page", dataProvider = "readTestData")
 	public void requestAPIWithSuccess(HashMap<Object, Object> data)
 	{
 		LOG.info("Enter:requestAPIWithSuccess");

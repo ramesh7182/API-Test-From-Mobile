@@ -3,9 +3,8 @@ package com.ramesh7182;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
+
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
@@ -42,7 +41,7 @@ public class BaseTest extends TestDataProvider {
 	{
 			
 		driver.closeApp();
-		
+
 	}
 	public static void setWebViewContext()
 	{
@@ -58,6 +57,20 @@ public class BaseTest extends TestDataProvider {
 	{
 		LOG.info("closing the driver");
 		AndroidCommonMethods.quit();
+	}
+	@BeforeMethod
+	public void AppHome()
+	{
+		String appPackage = driver.getCapabilities().getCapability("appPackage").toString();
+		String appActivity = driver.getCapabilities().getCapability("appActivity").toString();
+		AndroidCommonMethods.startActivity(appPackage,appActivity);
+
+	}
+	@AfterMethod
+	public void goHome()
+	{
+		AndroidCommonMethods.navigateHome();
+
 	}
 	
 }
