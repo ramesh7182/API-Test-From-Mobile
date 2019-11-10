@@ -21,6 +21,8 @@ Mobile automation framework to test API services from app UI.
 https://github.com/ramesh7182/API-Test-From-Mobile/blob/master/DemoVideo.mp4
 
 <h2>Enhancement</h2>
-1. All device capabilities will be put in application.properties file and read from there for uses. This will allow isolation of any test properties
-2. If more tests are added, then any label or text verification constant will be placed in ConstantUtil.java. This will be utility to read any constant from any external file like csv 
-3. Currently all the locators are placed inside page.java, but if it is increasing then it should be also externalized
+1. All device capabilities will be put in application.properties file and read from there for uses. This will allow isolation of any test properties<br>
+2. If more tests are added, then any label or text verification constant will be placed in ConstantUtil.java. This will be utility to read any constant from any external file like csv <br>
+3. Currently all the locators are placed inside page.java, but if it is increasing then it should be also externalized<br>
+4. Appium server start and stop is done manually but this can be automated through appium library<br>
+5. Android device emulator is started manually but this can be started automatically
