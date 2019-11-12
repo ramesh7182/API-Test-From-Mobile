@@ -34,17 +34,11 @@ public class AndroidCommonMethods {
 		caps.setCapability("app",System.getProperty("user.dir")+"\\src\\main\\resources\\Http.apk");
 		caps.setCapability("appPackage","org.mushare.httper");
 		caps.setCapability("appActivity","org.mushare.httper.MainActivity");
+		caps.setCapability("unicodeKeyboard", true);
+		caps.setCapability("resetKeyboard", true);
 		
 		driver =  new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), caps);
 		return driver;
-	}
-	
-	public static void wait(int seconds)
-	{
-		try {
-		LOG.info("Waiting for "+seconds +" second(s)..." );
-		Thread.sleep(seconds*1000);
-		}catch(Exception e) {}
 	}
 	
 	public static void quit()
@@ -68,11 +62,10 @@ public class AndroidCommonMethods {
 		Set<String> contextNames = driver.getContextHandles();
 		for (Iterator<String> it = contextNames.iterator(); it.hasNext(); ) {
 	        String f = it.next();
-	        System.out.println("Context :   " +f);
+			LOG.info("Context :   " +f);
 	    }
 		driver.context(contextName);
 		LOG.info(driver.context(contextName).getCurrentUrl());
-		wait(2);
 
 	}
 
@@ -80,6 +73,7 @@ public class AndroidCommonMethods {
 	{
 		waitForElementToBeVisible(be);
 		driver.findElement(be).sendKeys(text);
+		assertTrue(driver.findElement(be).getText().equalsIgnoreCase(text),"Entered text is not matched");
 	}
 	public static void clickElement(By be)
 	{
@@ -88,18 +82,16 @@ public class AndroidCommonMethods {
 	}
 	public static void clickElement(WebElement we)
 	{
-		wait(5);
+		waitForElementToBeVisible(we);
 		we.click();
 	}
 	public static void navigateBack()
 	{
 		driver.pressKeyCode(AndroidKeyCode.BACK);
-		wait(5);
 	}
 	public static void navigateHome()
 	{
 		driver.pressKeyCode(AndroidKeyCode.HOME);
-		wait(5);
 	}
 	public static void verifyText(By be, String text)
 	{
@@ -114,20 +106,33 @@ public class AndroidCommonMethods {
 	}
 	public static void verifyElementVisible(WebElement we)
 	{
-		wait(5);
+		waitForElementToBeVisible(we);
 		assertTrue(we.isDisplayed(),"Element is not displayed");
 	}
 	public static void startActivity(String appPackage, String activityName)
 	{
 		driver.startActivity(appPackage, activityName);
-		wait(5);
 	}
 	public static void waitForElementToBeVisible(By be)
 	{
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			WebElement element = wait.until(
-					ExpectedConditions.visibilityOfElementLocated(be));
+			WebElement element = (new WebDriverWait(driver, 10))
+					.until(ExpectedConditions.elementToBeClickable(be));
+		}catch (TimeoutException te)
+		{
+			LOG.info("Element not found in 10 seconds.");
+		}
+		catch (ElementNotVisibleException e)
+		{
+			LOG.info("Element not found in 10 seconds.");
+		}
+	}
+
+	public static void waitForElementToBeVisible( WebElement we)
+	{
+		try {
+			WebElement element = (new WebDriverWait(driver, 10))
+					.until(ExpectedConditions.elementToBeClickable(we));
 		}catch (TimeoutException te)
 		{
 			LOG.info("Element not found in 10 seconds.");
