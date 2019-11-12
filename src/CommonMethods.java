@@ -1,9 +1,7 @@
-package com.ramesh7182;
 import java.net.MalformedURLException;
 import java.net.URL;
 import io.appium.java_client.android.AndroidKeyCode;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import io.appium.java_client.android.AndroidDriver;
@@ -23,7 +21,7 @@ public class CommonMethods {
 	{
 		DesiredCapabilities caps = DesiredCapabilities.android();
 		caps.setCapability("deviceName","Android Emulator");
-		caps.setCapability("app",System.getProperty("user.dir")+"\\src\\main\\resources\\Http.apk");
+		caps.setCapability("app",System.getProperty("user.dir")+"\\src\\Http.apk");
 		caps.setCapability("appPackage","org.mushare.httper");
 		caps.setCapability("appActivity","org.mushare.httper.MainActivity");
 		caps.setCapability("unicodeKeyboard", true);

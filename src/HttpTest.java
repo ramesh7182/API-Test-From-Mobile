@@ -1,4 +1,3 @@
-import com.ramesh7182.CommonMethods;
 import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 
