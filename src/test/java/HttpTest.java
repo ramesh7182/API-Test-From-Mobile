@@ -1,46 +1,21 @@
-import com.ramesh7182.BaseTest;
-import com.ramesh7182.HttperHomePage;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.ramesh7182.CommonMethods;
 import org.testng.annotations.Test;
-import java.util.HashMap;
+import java.net.MalformedURLException;
 
-public class HttpTest extends BaseTest {
-
-	public static Log LOG = LogFactory.getLog(HttpTest.class);
-
-	@Test(description="Sending request to non exist page", dataProvider = "readTestData")
-	public void requestAPIWithFileNotFound(HashMap<Object, Object> data)
+public class HttpTest {
+	@Test
+	public void requestAPIWithFileNotFound() throws MalformedURLException
 	{
-		LOG.info("Enter:requestAPIWithFileNotFound");
-		String urlAPIFor404 = data.get("apiurl").toString();
-		String expectedStatusCode = data.get("statuscode").toString();
-		HttperHomePage httperHomePage = new HttperHomePage();
-		httperHomePage
-				.enterURL(urlAPIFor404)
-				.clickSend()
-				.clickPreview()
-				.verifyStatusCode(expectedStatusCode)
-				.goBack()
-				.verifyNoResourceError();
-		LOG.info("Exit:requestAPIWithFileNotFound");
+		String urlAPIFor404 = "dummy.restapiexample.com/api/v1/empl yeess";
+		String expectedStatusCode = "404";
+		CommonMethods cm = new CommonMethods();
+		cm.initDriver();
+		cm.enterURL(urlAPIFor404);
+		cm.clickSend();
+		cm.clickPreview();
+		cm.verifyStatusCode(expectedStatusCode);
+		cm.goBack();
+		cm.verifyNoResourceError();
+		cm.closeDriver();
 	}
-	@Test(description="Sending request to Valid page", dataProvider = "readTestData")
-	public void requestAPIWithSuccess(HashMap<Object, Object> data)
-	{
-		LOG.info("Enter:requestAPIWithSuccess");
-		String urlAPIForSuccess = data.get("apiurl").toString();
-		String expectedStatusCode = data.get("statuscode").toString();
-		HttperHomePage httperHomePage = new HttperHomePage();
-		httperHomePage
-				.enterURL(urlAPIForSuccess)
-				.clickSend()
-				.clickPreview()
-				.verifyStatusCode(expectedStatusCode);
-		LOG.info("Exit:requestAPIWithSuccess");
-	}
-
-
-
-
 }

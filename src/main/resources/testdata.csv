@@ -1,3 +1,0 @@
-testcase,torun,language,apiurl,statuscode
-requestAPIWithFileNotFound,y,en,dummy.restapiexample.com/api/v1/employeess,404
-requestAPIWithSuccess,y,en,dummy.restapiexample.com/api/v1/employees,200
